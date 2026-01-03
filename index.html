@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zero Gaming | Warzone Rebirth Island en Vivo</title>
+    <meta name="description" content="Stream diario de Warzone Rebirth Island, Haven Hallows y eventos especiales. Gameplay real, risas, rage y victorias que se sienten.">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <style>
+        :root {
+            --red-main: #E10600;
+            --red-soft: #FF2A2A;
+            --black-main: #0B0B0B;
+            --black-soft: #141414;
+            --text-gray: #B5B5B5;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--black-main);
+            color: white;
+            scroll-behavior: smooth;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--black-soft);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--red-main);
+            border-radius: 5px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--red-soft);
+        }
+        
+        /* Navbar styles */
+        .navbar {
+            background-color: var(--black-main);
+            border-bottom: 1px solid #333;
+            transition: all 0.3s ease;
+            padding: 15px 0;
+        }
+        .navbar.scrolled {
+            background-color: rgba(11, 11, 11, 0.95);
+            box-shadow: 0 4px 12px rgba(225, 6, 0, 0.15);
+        }
+        .nav-link {
+            color: white;
+            position: relative;
+            margin: 0 15px;
+            font-weight: 500;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: var(--red-main);
+            transition: width 0.3s ease;
+        }
+        .nav-link:hover {
+            color: var(--red-main);
+        }
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        .btn-primary {
+            background-color: var(--red-main);
+            border-color: var(--red-main);
+        }
+        .btn-primary:hover {
+            background-color: var(--red-soft);
+            border-color: var(--red-soft);
+        }
+        .btn-outline {
+            border: 2px solid white;
+            color: white;
+        }
+        .btn-outline:hover {
+            background-color: white;
+            color: var(--black-main);
+        }
+        
+        /* Hero section */
+        .hero {
+            height: 100vh;
+            position: relative;
+            background-color: var(--black-soft);
+            overflow: hidden;
+        }
+        .hero-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .hero-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--black-main);
+            opacity: 0.7;
+            z-index: 1;
+        }
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+        }
+        
+        /* Sections */
+        .section {
+            padding: 80px 0;
+        }
+        .section-title {
+            color: var(--red-main);
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+        
+        /* Cards */
+        .card-dark {
+            background-color: var(--black-main);
+            border: 1px solid #333;
+            transition: all 0.3s ease;
+        }
+        .card-dark:hover {
+            border-color: var(--red-main);
+        }
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            background-color: rgba(225, 6, 0, 0.2);
+            color: var(--red-main);
+        }
+        
+        /* Stats cards */
+        .stats-card {
+            background-color: var(--black-main);
+            border-radius: 10px;
+            padding: 30px;
+            text-align: center;
+            border: 1px solid #333;
+        }
+        .stats-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        .stats-title {
+            color: var(--text-gray);
+            margin-bottom: 10px;
+        }
+        .stats-change {
+            color: #4CAF50;
+            font-weight: 500;
+        }
+        
+        /* Footer */
+        .footer {
+            background-color: var(--black-soft);
+            padding: 60px 0 30px;
+            border-top: 1px solid #333;
+        }
+        .footer-title {
+            color: var(--red-main);
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+        .footer-link {
+            color: var(--text-gray);
+            text-decoration: none;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .footer-link:hover {
+            color: var(--red-main);
+            transform: translateX(4px);
+        }
+        .social-icon {
+            color: var(--text-gray);
+            transition: all 0.2s ease;
+            margin-right: 15px;
+            font-size: 1.2rem;
+        }
+        .social-icon:hover {
+            color: var(--red-main);
+            transform: translateY(-3px);
+        }
+        .copyright {
+            border-top: 1px solid #333;
+            padding-top: 30px;
+            margin-top: 30px;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+        }
+        
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        @keyframes slideUp {
+            from { 
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to { 
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        .pulse-red {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(225, 6, 0, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(225, 6, 0, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(225, 6, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <span class="fw-bold" style="font-size: 1.5rem; color: var(--red-main);">ZERO GAMING</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i data-feather="menu" class="text-white"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="live.html">EN VIVO</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="blog.html">BLOG</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="loadouts.html">LOADOUTS</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="about.html" data-i18n="nav_about">SOBRE ZERO</a>
+                    </li>
+                    <li class="nav-item ms-lg-3">
+                        <a href="live.html" class="btn btn-primary d-flex align-items-center" data-i18n="nav_envivo">
+                            <i data-feather="play" class="me-2" ></i> EN VIVO
+                        </a>
+                    </li>
+                    <li class="nav-item ms-lg-3 d-flex align-items-center">
+                     <button id="langToggle" class="btn btn-outline btn-sm">EN</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero d-flex align-items-center justify-content-center">
+        <div class="hero-overlay"></div>
+        <video autoplay muted loop class="hero-video">
+            <source src="https://assets.codepen.io/3364143/7btrrd.mp4" type="video/mp4">
+        </video>
+        <div class="hero-content text-center px-4">
+            <h1 class="display-3 fw-bold mb-4" style="color: var(--red-main);">ZERO GAMING</h1>
+            <p class="fs-4 mb-5" style="color: var(--text-gray ) ;" data-i18n="hero_desc">Aquí no vendemos humo. Stream diario de Warzone Rebirth Island, Haven Hallows y eventos especiales. Gameplay real, risas, rage y victorias que se sienten.</p>
+            <div class="d-flex flex-column flex-sm-row justify-content-center gap-3" >
+                <a href="live.html" class="btn btn-primary d-flex align-items-center justify-content-center px-5 py-3" data-i18n="nav_envivo">
+                    <i data-feather="youtube" class="me-2" ></i> VER DIRECTO
+                </a>
+                <a href="blog.html" class="btn btn-outline d-flex align-items-center justify-content-center px-5 py-3">
+                    <i data-feather="file-text" class="me-2"></i> BLOG
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section id="stats" class="section" style="background-color: var(--black-soft);">
+        <div class="container">
+            <h2 class="section-title text-center">STREAM STATISTICS</h2>
+            
+            <!-- Social Links -->
+            <div class="d-flex justify-content-center gap-3 mb-5">
+                <a href="https://youtube.com/zerogaming" target="_blank" class="social-icon">
+                    <i data-feather="youtube"></i>
+                </a>
+                <a href="https://twitch.tv/zerogaming" target="_blank" class="social-icon">
+                    <i data-feather="twitch"></i>
+                </a>
+                <a href="https://tiktok.com/@zerogaming" target="_blank" class="social-icon">
+                    <i data-feather="activity"></i>
+                </a>
+                <a href="https://kick.com/zerogaming" target="_blank" class="social-icon">
+                    <i data-feather="play"></i>
+                </a>
+            </div>
+            
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card slide-up">
+                        <div class="mb-3">
+                            <i data-feather="activity" style="color: var(--red-main); font-size: 2rem;"></i>
+                        </div>
+                        <div class="stats-value">1.87</div>
+                        <div class="stats-title">K/D Ratio</div>
+                        <div class="stats-change">+5.6%</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card slide-up">
+                        <div class="mb-3">
+                            <i data-feather="award" style="color: var(--red-main); font-size: 2rem;"></i>
+                        </div>
+                        <div class="stats-value">23.4%</div>
+                        <div class="stats-title">Win Rate</div>
+                        <div class="stats-change">+2.1%</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card slide-up">
+                        <div class="mb-3">
+                            <i data-feather="target" style="color: var(--red-main); font-size: 2rem;"></i>
+                        </div>
+                        <div class="stats-value">7.2</div>
+                        <div class="stats-title">Avg. Kills</div>
+                        <div class="stats-change">+0.8</div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="stats-card slide-up">
+                        <div class="mb-3">
+                            <i data-feather="clock" style="color: var(--red-main); font-size: 2rem;"></i>
+                        </div>
+                        <div class="stats-value">1,243</div>
+                        <div class="stats-title">Games Played</div>
+                        <div class="stats-change">+124</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Map Section -->
+    <section class="section" style="background-color: var(--black-main);">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <img src="http://static.photos/technology/1200x630/42" alt="Rebirth Island Map" class="img-fluid rounded-3 border border-2" style="border-color: var(--red-main) !important;">
+                </div>
+                <div class="col-lg-6">
+                    <h2 class="section-title">MAP STRATEGY</h2>
+                    <p class="fs-5 mb-4" style="color: var(--text-gray);">Master the key locations and rotations to dominate Rebirth Island. Our interactive map shows loot spots, power positions, and rotation paths used by top players.</p>
+                    <ul class="list-unstyled">
+                        <li class="mb-3 d-flex align-items-start">
+                            <i data-feather="check-circle" class="me-3" style="color: var(--red-main);"></i>
+                            <span>Bioweapons: High-tier loot with intense close-quarters combat</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i data-feather="check-circle" class="me-3" style="color: var(--red-main);"></i>
+                            <span>Prison Block: Central location with multiple vantage points</span>
+                        </li>
+                        <li class="mb-3 d-flex align-items-start">
+                            <i data-feather="check-circle" class="me-3" style="color: var(--red-main);"></i>
+                            <span>Living Quarters: Ideal for squad-based tactical play</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Loadouts Section -->
+    <section id="loadouts" class="section" style="background-color: var(--black-soft);">
+        <div class="container">
+            <h2 class="section-title text-center">TOP META LOADOUTS</h2>
+            <div class="row g-4">
+                <!-- Loadout Card 1 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-dark h-100">
+                        <img src="http://static.photos/technology/640x360/1" class="card-img-top" alt="Loadout 1">
+                        <div class="card-body">
+                            <h3 class="card-title fw-bold mb-3">Close Quarters Dominator</h3>
+                            <p class="card-text mb-4" style="color: var(--text-gray);">Perfect for aggressive pushes and building clearing with maximum mobility.</p>
+                            <div class="d-flex flex-wrap gap-2 mb-4">
+                                <span class="tag">SMG</span>
+                                <span class="tag">SHOTGUN</span>
+                                <span class="tag">MOBILE</span>
+                            </div>
+                            <a href="#" class="text-decoration-none d-flex align-items-center" style="color: var(--red-main); font-weight: 700;">
+                                View Details <i data-feather="arrow-right" class="ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loadout Card 2 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-dark h-100">
+                        <img src="http://static.photos/technology/640x360/2" class="card-img-top" alt="Loadout 2">
+                        <div class="card-body">
+                            <h3 class="card-title fw-bold mb-3">Long Range Sniper</h3>
+                            <p class="card-text mb-4" style="color: var(--text-gray);">Eliminate enemies from distance with this high-precision setup.</p>
+                            <div class="d-flex flex-wrap gap-2 mb-4">
+                                <span class="tag">SNIPER</span>
+                                <span class="tag">PISTOL</span>
+                                <span class="tag">GHOST</span>
+                            </div>
+                            <a href="#" class="text-decoration-none d-flex align-items-center" style="color: var(--red-main); font-weight: 700;">
+                                View Details <i data-feather="arrow-right" class="ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Loadout Card 3 -->
+                <div class="col-md-6 col-lg-4">
+                    <div class="card card-dark h-100">
+                        <img src="http://static.photos/technology/640x360/3" class="card-img-top" alt="Loadout 3">
+                        <div class="card-body">
+                            <h3 class="card-title fw-bold mb-3">Versatile AR Build</h3>
+                            <p class="card-text mb-4" style="color: var(--text-gray);">Balanced for all engagement ranges with excellent recoil control.</p>
+                            <div class="d-flex flex-wrap gap-2 mb-4">
+                                <span class="tag">AR</span>
+                                <span class="tag">SMG</span>
+                                <span class="tag">OVERKILL</span>
+                            </div>
+                            <a href="#" class="text-decoration-none d-flex align-items-center" style="color: var(--red-main); font-weight: 700;">
+                                View Details <i data-feather="arrow-right" class="ms-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="section" style="background: linear-gradient(to bottom, var(--black-soft), var(--black-main));">
+        <div class="container">
+            <div class="text-center mx-auto" style="max-width: 800px;">
+                <h2 class="section-title">JOIN THE TACTICAL SQUAD</h2>
+                <p class="fs-5 mb-5" style="color: var(--text-gray);">Get weekly meta updates, strategy guides, and exclusive content delivered to your inbox.</p>
+                <form class="row g-3 justify-content-center">
+                    <div class="col-sm-8">
+                        <input type="email" class="form-control form-control-lg bg-black-soft border border-secondary" placeholder="Your email address" style="color: white;">
+                    </div>
+                    <div class="col-sm-4">
+                        <button type="submit" class="btn btn-primary w-100 py-3">SUBSCRIBE</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="row g-5">
+                <div class="col-md-6 col-lg-3">
+                    <h3 class="footer-title">ZERO GAMING</h3>
+                    <p style="color: var(--text-gray);">The ultimate gaming hub for elite players. Watch, learn, and dominate.</p>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="text-white fw-bold mb-4">QUICK LINKS</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="index.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Inicio
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="live.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> En Vivo
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="blog.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Blog
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="loadouts.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Loadouts
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="text-white fw-bold mb-4">RESOURCES</h4>
+                    <ul class="list-unstyled">
+                        <li class="mb-2">
+                            <a href="about.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Sobre Zero
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="live.html#horarios" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Horarios
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="live.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Plataformas
+                            </a>
+                        </li>
+                        <li class="mb-2">
+                            <a href="blog.html" class="footer-link">
+                                <i data-feather="chevron-right" class="me-2" style="width: 16px; height: 16px;"></i> Últimos Posts
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="col-md-6 col-lg-3">
+                    <h4 class="text-white fw-bold mb-4">CONNECT</h4>
+                    <div class="d-flex gap-3 mb-4">
+                        <a href="https://youtube.com/zerogaming" target="_blank" class="social-icon">
+                            <i data-feather="youtube"></i>
+                        </a>
+                        <a href="https://twitch.tv/zerogaming" target="_blank" class="social-icon">
+                            <i data-feather="twitch"></i>
+                        </a>
+                        <a href="https://tiktok.com/@zerogaming" target="_blank" class="social-icon">
+                            <i data-feather="activity"></i>
+                        </a>
+                        <a href="https://kick.com/zerogaming" target="_blank" class="social-icon">
+                            <i data-feather="play"></i>
+                        </a>
+                    </div>
+                    <p style="color: var(--text-gray);">Subscribe for meta updates</p>
+                    <form class="d-flex">
+                        <input type="email" class="form-control bg-black-main text-white rounded-start rounded-0 border-end-0" placeholder="Your email">
+                        <button type="submit" class="btn btn-primary rounded-end rounded-0 border-start-0 px-3">
+                            <i data-feather="send"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="copyright text-center">
+    <p>©<span id="year"></span> Zero Gaming. All rights reserved. Not affiliated with Activision or Call of Duty.</p>
+</div>
+
+<script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+        </div>
+    </footer>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Custom JS -->
+    <script>
+        // Initialize Feather Icons
+        feather.replace();
+        
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.querySelector('.navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animate elements when they come into view
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.stats-card, .card-dark');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.classList.add('slide-up');
+                }
+            });
+        };
+
+        window.addEventListener('scroll', animateOnScroll);
+        animateOnScroll(); // Run once on page load
+
+        // Video play/pause control
+        const heroVideo = document.querySelector('.hero-video');
+        if (heroVideo) {
+            heroVideo.muted = true; // Ensure video is muted for autoplay
+            heroVideo.play().catch(e => console.log("Video autoplay prevented:", e));
+        }
+
+        /*language button*/
+const translations = {
+    es: {
+        hero_desc: "Aquí no vendemos humo. Stream diario de Warzone Rebirth Island, Haven Hallows y eventos especiales. Gameplay real, risas, rage y victorias que se sienten.",
+        btn_live: "VER DIRECTO",
+        btn_blog: "BLOG",
+        nav_blog: "BLOG",
+        nav_loadouts: "LOADOUTS",
+        nav_about: "SOBRE ZERO",
+        nav_envivo:"EN VIVO"
+    },
+    en: {
+        hero_desc: "No fake hype here. Daily Warzone Rebirth Island streams, Haven Hallows and special events. Real gameplay, laughs, rage and wins that hit hard.",
+        btn_live: "WATCH LIVE",
+        btn_blog: "BLOG",
+        nav_blog: "BLOG",
+        nav_loadouts: "LOADOUTS",
+        nav_about: "ABOUT ZERO",
+        nav_envivo:"LIVE"
+    }
+};
+
+let currentLang = localStorage.getItem("lang") || "es";
+
+function setLanguage(lang) {
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+        const key = el.getAttribute("data-i18n");
+        if (translations[lang][key]) {
+            el.textContent = translations[lang][key];
+        }
+    });
+
+    document.documentElement.lang = lang;
+    localStorage.setItem("lang", lang);
+
+    const btn = document.getElementById("langToggle");
+    if (btn) btn.textContent = lang === "es" ? "EN" : "ES";
+}
+
+document.getElementById("langToggle").addEventListener("click", () => {
+    currentLang = currentLang === "es" ? "en" : "es";
+    setLanguage(currentLang);
+});
+
+setLanguage(currentLang);
+
+    </script>
+</body>
+</html>
