@@ -4,31 +4,131 @@
 <meta charset="UTF-8">
 <title>Zero Gaming | En Vivo</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap -->
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;800&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
-<link rel="stylesheet" href="/style.css">
+
+<style>
+body {
+  background: #050608;
+  color: #fff;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.section {
+  padding: 120px 0 60px;
+}
+
+.live-box {
+  background: #0b0e14;
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.status-live {
+  color: #1aff6a;
+  font-weight: 800;
+}
+
+.status-offline {
+  color: #e1062c;
+  font-weight: 800;
+}
+
+iframe {
+  border-radius: 12px;
+}
+</style>
 </head>
 
 <body>
-<!-- NAVBAR -->
-<div id="navbar" class="navbar navbar-expand-lg fixed-top bg-black">
 
-</div>
+<!-- NAVBAR SIMPLE -->
+<nav class="navbar navbar-dark bg-black fixed-top">
+  <div class="container">
+    <span class="navbar-brand fw-bold text-danger">ZERO GAMING</span>
+  </div>
+</nav>
 
 <section class="section text-center">
-<div class="container">
-<h1 class="text-danger fw-bold mb-4">🔴 STREAM EN VIVO</h1>
+  <div class="container">
 
-<div class="ratio ratio-16x9 mb-4">
-<iframe src="https://www.youtube.com/embed/live_stream?channel=UCXXXX" allowfullscreen></iframe>
-</div>
+    <h1 class="fw-bold text-danger mb-4">🔴 STREAM EN VIVO</h1>
 
-</div>
+    <div id="status" class="mb-3"></div>
+
+    <div id="live-container" class="live-box">
+      <p class="text-muted">Buscando stream activo...</p>
+    </div>
+
+  </div>
 </section>
-<div id="footer"></div>
 
-<script src="js/layout.js"></script>
-<script>feather.replace()</script>
+<footer class="text-center text-muted py-4">
+  © ZeroGaming.games – Diario de guerra en vivo
+</footer>
+
+<script>
+/* ==============================
+   CONFIGURACIÓN
+================================ */
+const API_KEY = "AIzaSyAGuIrPc-x4oEm3NreeIe67NCKoFXw0d70";
+const CHANNEL_ID = "ZeroGaming504HN";
+
+/* ==============================
+   LÓGICA YOUTUBE LIVE
+================================ */
+async function cargarLive() {
+  const statusEl = document.getElementById("status");
+  const container = document.getElementById("live-container");
+
+  try {
+    const searchUrl = `https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL_ID}&eventType=live&type=video&key=${API_KEY}`;
+    const res = await fetch(searchUrl);
+    const data = await res.json();
+
+    if (!data.items || data.items.length === 0) {
+      statusEl.innerHTML = `<span class="status-offline">⚫ OFFLINE</span>`;
+      container.innerHTML = `
+        <p class="text-muted mb-0">
+          Zero no está en vivo ahora.<br>
+          Pronto arrancamos otra operación 🔥
+        </p>`;
+      return;
+    }
+
+    const videoId = data.items[0].id.videoId;
+    const title = data.items[0].snippet.title;
+
+    statusEl.innerHTML = `<span class="status-live">🔴 EN VIVO AHORA</span>`;
+    container.innerHTML = `
+      <h5 class="mb-3">${title}</h5>
+      <div class="ratio ratio-16x9">
+        <iframe 
+          src="https://www.youtube.com/embed/${videoId}?autoplay=1"
+          allowfullscreen
+          allow="autoplay">
+        </iframe>
+      </div>
+    `;
+
+  } catch (error) {
+    console.error(error);
+    container.innerHTML = `<p class="text-danger">Error cargando el stream</p>`;
+  }
+}
+
+/* ==============================
+   AUTO-REFRESH
+================================ */
+cargarLive();
+setInterval(cargarLive, 30000); // cada 30 segundos
+</script>
+
 </body>
 </html>
+
